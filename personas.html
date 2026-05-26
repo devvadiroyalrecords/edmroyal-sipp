@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevvadiOS - Suno Personas Training Core</title>
+    <link rel="stylesheet" href="personas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <h1>DevvadiOS Personas</h1>
+                <span class="tagline">Neural Vocal & Acoustic Training Core</span>
+            </div>
+            <a href="index.html" class="nav-back">← PUBLIC PORTAL</a>
+        </header>
+
+        <div class="layout-grid">
+            <!-- Left Column: Customizer & Trainer -->
+            <div class="main-column">
+                <div class="panel">
+                    <h2 class="panel-title">
+                        <span class="gold-dot"></span>
+                        Vocal Training & Parameter Control
+                    </h2>
+
+                    <!-- Reference Uploader -->
+                    <div class="upload-area" id="upload-zone">
+                        <input type="file" id="file-uploader" style="display: none;" accept="audio/*">
+                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--gold-main)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        <p class="gold-text">Click to Import Reference Vocal</p>
+                        <p style="font-size: 0.8rem;">Supports MP3, WAV, M4A | Or use default vocal.m4a</p>
+                    </div>
+
+                    <!-- Live Spectrograph / Wave visualizer -->
+                    <div class="visualizer-container">
+                        <canvas id="wave-canvas"></canvas>
+                        <div class="visualizer-overlay" id="visualizer-text-box">
+                            <p class="visualizer-text">Acoustic Signal Visualizer</p>
+                            <p style="font-size: 0.75rem; color: var(--text-dim); margin: 0;" id="visualizer-status">Waiting for audio context activation...</p>
+                        </div>
+                    </div>
+
+                    <!-- Inputs -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px;">
+                        <div>
+                            <label style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 8px;">Persona Name</label>
+                            <input type="text" id="persona-name" class="input-field" placeholder="e.g. King Sovereign..." value="Royal Records Platinum">
+                        </div>
+                        <div>
+                            <label style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 8px;">Base Neural Model</label>
+                            <div class="select-wrapper">
+                                <select id="persona-base-model" class="select-box">
+                                    <option value="Devvadi-v2-Acoustic">Devvadi-v2-Acoustic (Recommended)</option>
+                                    <option value="Suno-Persona-X">Suno-Persona-X</option>
+                                    <option value="Vadi-Vocal-Transformer">Vadi-Vocal-Transformer</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Custom Sliders -->
+                    <div class="slider-group">
+                        <div class="slider-control">
+                            <div class="slider-header">
+                                <span class="slider-label">Vocal Warmth (Bass Weight)</span>
+                                <span class="slider-val" id="warmth-val">80%</span>
+                            </div>
+                            <input type="range" id="slider-warmth" class="slider-input" min="0" max="100" value="80">
+                        </div>
+                        
+                        <div class="slider-control">
+                            <div class="slider-header">
+                                <span class="slider-label">Acoustic Clarity (Treble Sparkle)</span>
+                                <span class="slider-val" id="clarity-val">85%</span>
+                            </div>
+                            <input type="range" id="slider-clarity" class="slider-input" min="0" max="100" value="85">
+                        </div>
+
+                        <div class="slider-control">
+                            <div class="slider-header">
+                                <span class="slider-label">Vibrato Resonance (Formant Shift)</span>
+                                <span class="slider-val" id="vibrato-val">60%</span>
+                            </div>
+                            <input type="range" id="slider-vibrato" class="slider-input" min="0" max="100" value="60">
+                        </div>
+
+                        <div class="slider-control">
+                            <div class="slider-header">
+                                <span class="slider-label">Linguistic Entropy (Vocal Freedom)</span>
+                                <span class="slider-val" id="entropy-val">40%</span>
+                            </div>
+                            <input type="range" id="slider-entropy" class="slider-input" min="0" max="100" value="40">
+                        </div>
+                    </div>
+
+                    <!-- Train Trigger -->
+                    <button class="btn-gold" id="btn-train-persona">Train Voice Persona</button>
+                </div>
+            </div>
+
+            <!-- Right Column: Console & Persona Library -->
+            <div class="aside-column" style="display: flex; flex-direction: column; gap: 30px;">
+                <!-- Telemetry Terminal -->
+                <div class="panel" style="padding-bottom: 20px;">
+                    <h2 class="panel-title">
+                        <span class="gold-dot"></span>
+                        Neural Training Logs
+                    </h2>
+                    <div class="terminal" id="terminal-logs">
+                        <div class="terminal-line system">DevvadiOS Trainer Status: STANDBY</div>
+                        <div class="terminal-line">Select training parameters, import vocal stem, and press "Train Voice Persona".</div>
+                    </div>
+
+                    <!-- Vocal Synthesizer Dashboard -->
+                    <div class="synthesis-group">
+                        <label style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim); display: block; margin-bottom: 4px;">Melodic Phrase Synthesizer</label>
+                        <div class="lyric-input-wrapper">
+                            <input type="text" id="lyric-input" class="input-field" placeholder="Enter lyrics/prompt here..." value="DevvadiOS Online, frequencies synced">
+                            <button class="synth-btn-inline" id="btn-synth-audio">Synthesize</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saved Personas Showcase -->
+                <div class="panel">
+                    <h2 class="panel-title" style="margin-bottom: 20px;">
+                        <span class="gold-dot"></span>
+                        Voice Persona Registry
+                    </h2>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <span class="status-indicator">
+                            <span class="status-dot"></span>
+                            ACTIVE DIRECTORY ONLINE
+                        </span>
+                    </div>
+
+                    <div id="personas-container">
+                        <!-- Loaded via Go REST API / Local Fallback -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let audioCtx = null;
+        let analyser = null;
+        let animationFrameId = null;
+        let isTraining = false;
+        let activePersona = null;
+        let rawPersonas = [];
+
+        // Connect Sliders to Display
+        const sliders = [
+            { id: 'slider-warmth', valId: 'warmth-val' },
+            { id: 'slider-clarity', valId: 'clarity-val' },
+            { id: 'slider-vibrato', valId: 'vibrato-val' },
+            { id: 'slider-entropy', valId: 'entropy-val' }
+        ];
+
+        sliders.forEach(sl => {
+            const input = document.getElementById(sl.id);
+            const valueSpan = document.getElementById(sl.valId);
+            input.addEventListener('input', (e) => {
+                valueSpan.innerText = `${e.target.value}%`;
+            });
+        });
+
+        // Initialize Web Audio and start drawing the spectrum background
+        function initAudio() {
+            if (audioCtx) return;
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioContext();
+            analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 256;
+            document.getElementById('visualizer-status').innerText = 'Neural Acoustic Space Active';
+            drawVisualizer();
+        }
+
+        // Draw Canvas Frequency Spectrum
+        const canvas = document.getElementById('wave-canvas');
+        const canvasCtx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function drawVisualizer() {
+            animationFrameId = requestAnimationFrame(drawVisualizer);
+            if (!analyser) return;
+
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            analyser.getByteFrequencyData(dataArray);
+
+            canvasCtx.fillStyle = 'rgba(7, 7, 9, 0.2)';
+            canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const barWidth = (canvas.width / bufferLength) * 1.5;
+            let barHeight;
+            let x = 0;
+
+            for(let i = 0; i < bufferLength; i++) {
+                barHeight = dataArray[i] / 2;
+
+                // Color palette - luxury glowing gold gradients
+                canvasCtx.fillStyle = `rgba(212, 175, 55, ${barHeight / 150})`;
+                canvasCtx.fillRect(x, canvas.height - barHeight * 1.5, barWidth - 2, barHeight * 1.5);
+
+                x += barWidth;
+            }
+
+            // Draw center wave representation
+            canvasCtx.beginPath();
+            canvasCtx.lineWidth = 1.5;
+            canvasCtx.strokeStyle = 'rgba(243, 229, 171, 0.4)';
+            let sliceWidth = canvas.width * 1.0 / bufferLength;
+            let xc = 0;
+            for(let i = 0; i < bufferLength; i++) {
+                let v = dataArray[i] / 128.0;
+                let y = v * canvas.height / 2;
+
+                if(i === 0) {
+                    canvasCtx.moveTo(xc, y);
+                } else {
+                    canvasCtx.lineTo(xc, y);
+                }
+                xc += sliceWidth;
+            }
+            canvasCtx.stroke();
+        }
+
+        // File Uploader Trigger
+        document.getElementById('upload-zone').addEventListener('click', () => {
+            initAudio();
+            document.getElementById('file-uploader').click();
+        });
+
+        document.getElementById('file-uploader').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const terminal = document.getElementById('terminal-logs');
+                terminal.innerHTML += `<div class="terminal-line success">&gt; Loaded local voice reference file: ${file.name} (${Math.round(file.size / 1024)} KB)</div>`;
+                terminal.scrollTop = terminal.scrollHeight;
+                
+                // Simulate loading/decoding chime
+                playTone(440, "sine", 0.1, 0.1);
+                setTimeout(() => playTone(880, "sine", 0.15, 0.05), 100);
+            }
+        });
+
+        // Trigger Audio activation on document interaction
+        document.body.addEventListener('click', () => {
+            initAudio();
+        }, { once: true });
+
+        // Synthesize Melody sweeps
+        function playTone(freq, type, duration, volume) {
+            if (!audioCtx) return;
+            
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            const filterNode = audioCtx.createBiquadFilter();
+
+            osc.type = type || "sine";
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            
+            // Resonance setup
+            filterNode.type = "lowpass";
+            filterNode.Q.setValueAtTime(4, audioCtx.currentTime);
+            filterNode.frequency.setValueAtTime(freq * 1.5, audioCtx.currentTime);
+            filterNode.frequency.exponentialRampToValueAtTime(freq * 0.7, audioCtx.currentTime + duration);
+
+            gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+            osc.connect(filterNode);
+            filterNode.connect(gainNode);
+            gainNode.connect(analyser);
+            analyser.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        }
+
+        // Lyric synth generator logic
+        document.getElementById('btn-synth-audio').addEventListener('click', () => {
+            initAudio();
+            const lyrics = document.getElementById('lyric-input').value.trim();
+            if (!lyrics) return;
+
+            const terminal = document.getElementById('terminal-logs');
+            terminal.innerHTML += `<div class="terminal-line system">&gt; Synthesizing phrase: "${lyrics}"...</div>`;
+            
+            // Map character frequencies to melodic tones
+            let noteDelay = 0;
+            const textToFreq = (char) => {
+                const code = char.charCodeAt(0);
+                const pentatonic = [130.81, 146.83, 164.81, 196.00, 220.00, 261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99, 880.00];
+                const index = code % pentatonic.length;
+                return pentatonic[index];
+            };
+
+            const characters = lyrics.split('').slice(0, 25);
+            characters.forEach((char, index) => {
+                if (char === ' ') {
+                    noteDelay += 0.22;
+                    return;
+                }
+                const freq = textToFreq(char);
+                setTimeout(() => {
+                    // Custom gold synth design (Dual-oscillator FM-modulated synth chime)
+                    const now = audioCtx.currentTime;
+                    const carrier = audioCtx.createOscillator();
+                    const modulator = audioCtx.createOscillator();
+                    const modGain = audioCtx.createGain();
+                    const filter = audioCtx.createBiquadFilter();
+                    const synthGain = audioCtx.createGain();
+
+                    carrier.type = "sawtooth";
+                    modulator.type = "sine";
+
+                    carrier.frequency.setValueAtTime(freq, now);
+                    const vibratoVal = parseFloat(document.getElementById('slider-vibrato').value) / 100.0;
+                    carrier.frequency.linearRampToValueAtTime(freq * (1.0 + vibratoVal * 0.05), now + 0.15);
+                    carrier.frequency.exponentialRampToValueAtTime(freq, now + 0.35);
+
+                    modulator.frequency.setValueAtTime(freq * 1.5, now);
+                    modGain.gain.setValueAtTime(100 * vibratoVal, now);
+
+                    filter.type = "lowpass";
+                    const clarityVal = parseFloat(document.getElementById('slider-clarity').value) / 100.0;
+                    filter.frequency.setValueAtTime(300 + clarityVal * 2200, now);
+                    filter.Q.setValueAtTime(5, now);
+
+                    synthGain.gain.setValueAtTime(0.18, now);
+                    synthGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+
+                    modulator.connect(modGain);
+                    modGain.connect(carrier.frequency);
+                    carrier.connect(filter);
+                    filter.connect(synthGain);
+                    synthGain.connect(analyser);
+                    analyser.connect(audioCtx.destination);
+
+                    carrier.start();
+                    modulator.start();
+
+                    carrier.stop(now + 0.5);
+                    modulator.stop(now + 0.5);
+                }, noteDelay * 1000);
+                noteDelay += 0.15;
+            });
+
+            setTimeout(() => {
+                terminal.innerHTML += `<div class="terminal-line success">&gt; Synthesis generation done. Frequencies flushed.</div>`;
+                terminal.scrollTop = terminal.scrollHeight;
+            }, noteDelay * 1000 + 100);
+        });
+
+        // Load Personas Registry via Backend / Local Fallback
+        async function fetchPersonas() {
+            try {
+                const response = await fetch('/api/personas');
+                if (!response.ok) throw new Error("API Offline");
+                const personas = await response.json();
+                rawPersonas = personas;
+                renderPersonas();
+            } catch (err) {
+                console.warn("DevvadiOS backend offline. Running Local Storage / Resilient cache fallback model.", err);
+                
+                // Read from localStorage or construct defaults
+                const localData = localStorage.getItem("devvadios_personas");
+                if (localData) {
+                    rawPersonas = JSON.parse(localData);
+                } else {
+                    rawPersonas = [
+                        {
+                            id: "p1",
+                            name: "King Vadi Sovereign",
+                            baseModel: "Devvadi-v2-Acoustic",
+                            warmth: 0.85,
+                            clarity: 0.90,
+                            vibrato: 0.65,
+                            entropy: 0.40,
+                            status: "Trained",
+                            created: "2026-05-25"
+                        },
+                        {
+                            id: "p2",
+                            name: "Sonic Vadi",
+                            baseModel: "Suno-Persona-X",
+                            warmth: 0.70,
+                            clarity: 0.95,
+                            vibrato: 0.80,
+                            entropy: 0.50,
+                            status: "Trained",
+                            created: "2026-05-25"
+                        }
+                    ];
+                    localStorage.setItem("devvadios_personas", JSON.stringify(rawPersonas));
+                }
+                renderPersonas();
+            }
+        }
+
+        function renderPersonas() {
+            const container = document.getElementById('personas-container');
+            container.innerHTML = rawPersonas.map(p => {
+                const activeClass = (activePersona && activePersona.id === p.id) ? 'active' : '';
+                return `
+                    <div class="persona-card ${activeClass}" onclick="selectPersona('${p.id}')">
+                        <h3>${p.name}</h3>
+                        <div class="meta">${p.baseModel} (${p.status})</div>
+                        <div class="metrics-badge">
+                            <span>Warm: ${Math.round(p.warmth * 100)}%</span>
+                            <span>Clear: ${Math.round(p.clarity * 100)}%</span>
+                            <span>Res: ${Math.round(p.vibrato * 100)}%</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Selection of preloaded persona
+        function selectPersona(id) {
+            initAudio();
+            const p = rawPersonas.find(x => x.id === id);
+            if (!p) return;
+            activePersona = p;
+
+            // Update parameters
+            document.getElementById('persona-name').value = p.name;
+            document.getElementById('persona-base-model').value = p.baseModel;
+            document.getElementById('slider-warmth').value = p.warmth * 100;
+            document.getElementById('warmth-val').innerText = `${Math.round(p.warmth * 100)}%`;
+            document.getElementById('slider-clarity').value = p.clarity * 100;
+            document.getElementById('clarity-val').innerText = `${Math.round(p.clarity * 100)}%`;
+            document.getElementById('slider-vibrato').value = p.vibrato * 100;
+            document.getElementById('vibrato-val').innerText = `${Math.round(p.vibrato * 100)}%`;
+            document.getElementById('slider-entropy').value = p.entropy * 100;
+            document.getElementById('entropy-val').innerText = `${Math.round(p.entropy * 100)}%`;
+
+            // Style selection refresh
+            renderPersonas();
+            
+            // Synthesize short identification sweep
+            playTone(220, "triangle", 0.15, 0.12);
+            setTimeout(() => playTone(330, "triangle", 0.12, 0.12), 80);
+            setTimeout(() => playTone(440, "sine", 0.25, 0.15), 160);
+
+            const terminal = document.getElementById('terminal-logs');
+            terminal.innerHTML += `<div class="terminal-line success">&gt; Loaded Voice Persona: ${p.name} weights activated.</div>`;
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        // Trainer trigger flow
+        document.getElementById('btn-train-persona').addEventListener('click', async () => {
+            initAudio();
+            if (isTraining) return;
+
+            const name = document.getElementById('persona-name').value.trim();
+            const model = document.getElementById('persona-base-model').value;
+            if (!name) {
+                alert("Please declare a voice persona name!");
+                return;
+            }
+
+            isTraining = true;
+            const btn = document.getElementById('btn-train-persona');
+            btn.disabled = true;
+            btn.innerText = "Training Model...";
+
+            const terminal = document.getElementById('terminal-logs');
+            terminal.innerHTML = `<div class="terminal-line system">&gt; Initializing DevvadiOS Trainer session for: ${name}...</div>`;
+
+            // Training logs simulated array
+            const staticLogs = [
+                "Initializing DevvadiOS Voice Trainer v2.5.0-Gold...",
+                "Importing voice reference audio sample...",
+                "Running acoustic frequency extraction (FFT spectrum)...",
+                "Isolating fundamental vocal frequency (F0 pitch contours)...",
+                "Mapping formants and linguistic pattern entropy...",
+                "Fitting neural vector representations to latent space...",
+                "Twin Sonic VADI: Analyzing room acoustic reflections...",
+                "Twin Architect VADI: Structuring model parameter weights...",
+                "Training epoch 1/5 - Loss: 1.842 (LR: 0.0010)...",
+                "Training epoch 2/5 - Loss: 1.108 (LR: 0.0008)...",
+                "Training epoch 3/5 - Loss: 0.654 (LR: 0.0005)...",
+                "Training epoch 4/5 - Loss: 0.312 (LR: 0.0003)...",
+                "Training epoch 5/5 - Loss: 0.087 (LR: 0.0001)...",
+                "Voice reference weights optimized successfully.",
+                "Registering trained voice weights to DevvadiOS Sovereign core...",
+                "Vocal Persona synchronization: COMPLETE."
+            ];
+
+            let step = 0;
+            function processLogStep() {
+                if (step < staticLogs.length) {
+                    const line = staticLogs[step];
+                    let cssClass = "";
+                    
+                    if (line.includes("COMPLETE") || line.includes("successfully")) {
+                        cssClass = "success";
+                        playTone(523.25, "sine", 0.4, 0.15); // Completion chime
+                        setTimeout(() => playTone(659.25, "sine", 0.45, 0.15), 100);
+                    } else if (line.includes("Initializing") || line.includes("Twin")) {
+                        cssClass = "system";
+                        playTone(330, "triangle", 0.08, 0.08); // Process chime
+                    } else {
+                        playTone(150 + Math.random() * 300, "sine", 0.04, 0.06);
+                    }
+
+                    terminal.innerHTML += `<div class="terminal-line ${cssClass}">&gt; ${line}</div>`;
+                    terminal.scrollTop = terminal.scrollHeight;
+                    step++;
+                    setTimeout(processLogStep, 600);
+                } else {
+                    saveTrainedPersonaLocal(name, model);
+                }
+            }
+
+            processLogStep();
+        });
+
+        // Save trained persona locally (and try POSTing as well)
+        async function saveTrainedPersonaLocal(name, baseModel) {
+            const warmth = parseFloat(document.getElementById('slider-warmth').value) / 100;
+            const clarity = parseFloat(document.getElementById('slider-clarity').value) / 100;
+            const vibrato = parseFloat(document.getElementById('slider-vibrato').value) / 100;
+            const entropy = parseFloat(document.getElementById('slider-entropy').value) / 100;
+
+            const newPersonaObj = {
+                id: `p-${Date.now()}`,
+                name,
+                baseModel,
+                warmth,
+                clarity,
+                vibrato,
+                entropy,
+                status: "Trained",
+                created: new Date().toISOString().split('T')[0]
+            };
+
+            // Save to localStorage cache
+            rawPersonas.push(newPersonaObj);
+            localStorage.setItem("devvadios_personas", JSON.stringify(rawPersonas));
+
+            // Attempt to hit live Go API
+            try {
+                await fetch('/api/personas', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newPersonaObj)
+                });
+            } catch (err) {
+                console.log("Saving locally only - DevvadiOS backend offline.");
+            }
+
+            renderPersonas();
+            selectPersona(newPersonaObj.id);
+
+            isTraining = false;
+            const btn = document.getElementById('btn-train-persona');
+            btn.disabled = false;
+            btn.innerText = "Train Voice Persona";
+        }
+
+        // Init loads
+        fetchPersonas();
+    </script>
+</body>
+</html>

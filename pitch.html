@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEVVADI KINGDOM — Executive Portfolio & Pitch Poster</title>
+  
+  <!-- Typography & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================
+       DEVVADI KINGDOM EXECUTIVE ONE-PAGER POSTER
+       Imperial Obsidian & Royal Gold Colorway
+       ========================================== */
+    :root {
+      --color-obsidian: #080809;
+      --color-obsidian-deep: #030304;
+      --color-gold: #d4af37;
+      --color-gold-dark: #aa7c11;
+      --color-gold-light: #f3e5ab;
+      --color-platinum: #f1f1f4;
+      --color-muted: #8e8e9c;
+      --font-display: 'Cinzel', serif;
+      --font-body: 'Montserrat', sans-serif;
+      --border-glow: 0 0 25px rgba(212, 175, 55, 0.15);
+      --border-glow-intense: 0 0 35px rgba(212, 175, 55, 0.35);
+      --transition-lux: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Reset & Base Grid */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--color-obsidian-deep);
+      color: var(--color-platinum);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Background Ambient Textures */
+    .bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.06) 0%, transparent 60%),
+        radial-gradient(circle at 10% 80%, rgba(170, 124, 17, 0.03) 0%, transparent 45%);
+      z-index: 1;
+    }
+
+    /* POSTER WRAPPER */
+    .poster-container {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(12, 12, 15, 0.90);
+      border: 1px solid rgba(212, 175, 55, 0.20);
+      border-radius: 20px;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95), var(--border-glow);
+      padding: 60px;
+      position: relative;
+      z-index: 2;
+      transition: var(--transition-lux);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+    }
+
+    .poster-container:hover {
+      border-color: rgba(212, 175, 55, 0.40);
+      box-shadow: 0 50px 120px rgba(0, 0, 0, 1), var(--border-glow-intense);
+    }
+
+    /* DOUBLE-THIN BORDER FRAME EFFECT */
+    .inner-frame {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      right: 15px;
+      bottom: 15px;
+      border: 1px solid rgba(212, 175, 55, 0.08);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    /* BRAND HEADER (CO-BRANDED ARTISTIC MARKS) */
+    .poster-header {
+      text-align: center;
+      margin-bottom: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logos-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .logo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-frame {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      overflow: hidden;
+      background: rgba(8, 8, 9, 0.9);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      transition: var(--transition-lux);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .logo-tag {
+      font-size: 7px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--color-gold);
+      text-transform: uppercase;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 5.5vw, 42px);
+      font-weight: 900;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      margin-top: 15px;
+      background: linear-gradient(135deg, #ffd700 0%, #aa7c11 50%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 4px 15px rgba(0,0,0,0.6));
+    }
+
+    .brand-subtitle {
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.25em;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+
+    /* MAIN ASYMMETRICAL GRID */
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1.2fr 1.8fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    /* LEFT PILLAR: THE VISUAL HEADLINE */
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .hero-card {
+      width: 100%;
+      aspect-ratio: 1 / 1.1;
+      border-radius: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+      transition: var(--transition-lux);
+    }
+
+    .hero-card:hover {
+      border-color: var(--color-gold);
+      transform: translateY(-4px);
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(10%) contrast(110%);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 45%;
+      background: linear-gradient(to top, rgba(12, 12, 15, 1) 0%, rgba(12, 12, 15, 0) 100%);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 0.15em;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .hero-role {
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      color: var(--color-gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* SYSTEM STATS BLOCK */
+    .stats-card {
+      background: rgba(5, 5, 6, 0.8);
+      border: 1px solid rgba(212, 175, 55, 0.12);
+      border-radius: 10px;
+      padding: 24px;
+    }
+
+    .stats-title {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--color-gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      padding-bottom: 8px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 11px;
+    }
+
+    .stat-label {
+      color: var(--color-muted);
+      font-weight: 400;
+    }
+
+    .stat-val {
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-align: right;
+    }
+
+    /* RIGHT PILLAR: EXECUTIVE PILLARS */
+    .right-column {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .executive-card {
+      background: rgba(12, 12, 15, 0.95);
+      border: 1px solid rgba(212, 175, 55, 0.10);
+      border-radius: 12px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-lux);
+    }
+
+    .executive-card:hover {
+      border-color: rgba(212, 175, 55, 0.25);
+      background: rgba(16, 16, 20, 0.95);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    .card-tag {
+      font-family: var(--font-display);
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: var(--color-gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-tag::after {
+      content: '';
+      flex-grow: 1;
+      height: 1px;
+      background: rgba(212, 175, 55, 0.15);
+    }
+
+    .card-headline {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--color-muted);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+    }
+
+    .bullet-dot {
+      color: var(--color-gold);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* FOOTER METRICS FRAME */
+    .poster-footer {
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      padding-top: 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .footer-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-logo-frame {
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 4px;
+      background: #000;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-logo-frame.labs-frame {
+      width: 76px;
+    }
+
+    .footer-logo-tag {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--color-muted);
+      text-transform: uppercase;
+    }
+
+    .confidential-seal {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      color: var(--color-gold);
+      border: 1px solid var(--color-gold);
+      padding: 8px 24px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      box-shadow: var(--border-glow);
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .credits-text {
+      font-size: 10px;
+      color: var(--color-muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ACTION BUTTONS (FLOATING & HIDDEN ON PRINT) */
+    .action-panel {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      gap: 12px;
+      z-index: 100;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+      color: var(--color-obsidian-deep);
+      border: 1px solid var(--color-gold);
+      padding: 12px 24px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      border-radius: 4px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5), var(--border-glow);
+      transition: var(--transition-lux);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: var(--color-gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.6), var(--border-glow-intense);
+    }
+
+    /* LEDGER STYLE DOCUMENT SUBMISSION QUESTIONNAIRE */
+    .ledger-section {
+      background: rgba(12, 12, 15, 0.95);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 12px;
+      padding: 40px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    
+    .ledger-header {
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 15px;
+    }
+
+    .ledger-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--color-gold);
+      text-transform: uppercase;
+    }
+
+    .ledger-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .ledger-item {
+      border-bottom: 1px solid rgba(212, 175, 55, 0.06);
+      padding-bottom: 15px;
+    }
+
+    .ledger-question {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--color-gold-light);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .ledger-answer {
+      font-size: 12px;
+      color: var(--color-platinum);
+      line-height: 1.6;
+    }
+
+    /* PRINT SPECIFIC STYLING OVERRIDES */
+    @media print {
+      body {
+        background: #000;
+        padding: 0;
+      }
+      .bg-overlay, .action-panel {
+        display: none;
+      }
+      .poster-container {
+        box-shadow: none;
+        border: 1px solid var(--color-gold);
+        max-width: 100%;
+        padding: 40px;
+      }
+      .inner-frame {
+        border-color: rgba(212, 175, 55, 0.3);
+      }
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 768px) {
+      body {
+        padding: 20px 10px;
+      }
+      .poster-container {
+        padding: 30px 20px;
+      }
+      .inner-frame {
+        top: 8px;
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+      }
+      .grid-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .hero-card {
+        aspect-ratio: 16 / 10;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Ambient Textures -->
+  <div class="bg-overlay"></div>
+
+  <!-- MAIN POSTER STRUCTURE -->
+  <div class="poster-container">
+    <div class="inner-frame"></div>
+    
+    <!-- HEADER -->
+    <header class="poster-header">
+      <div class="logos-row">
+        <div class="logo-item">
+          <div class="logo-frame">
+            <img src="logo_vadi.png" alt="Devvadi records monogram" class="logo-img">
+          </div>
+          <span class="logo-tag">DEVVADI ROYAL RECORDS</span>
+        </div>
+        <div class="logo-item">
+          <div class="logo-frame">
+            <img src="logo_records.png" alt="King Vadi emblem monogram" class="logo-img">
+          </div>
+          <span class="logo-tag">KING VADI</span>
+        </div>
+      </div>
+      <h1 class="brand-title">DEVVADI KINGDOM</h1>
+      <h2 class="brand-subtitle">Visual, Sonic & Tech R&D Holding Company</h2>
+    </header>
+
+    <!-- CONTENT GRID -->
+    <main class="grid-container">
+      
+      <!-- LEFT COLUMN -->
+      <section class="left-column">
+        
+        <!-- Main Artist Card -->
+        <div class="hero-card">
+          <img src="banner.jpg" alt="Enokh Devvadi Musa banner" class="hero-img">
+          <div class="hero-overlay">
+            <h3 class="hero-name">ENOKH DEVVADI MUSA</h3>
+            <span class="hero-role">Executive Producer & Creator</span>
+          </div>
+        </div>
+
+        <!-- System Stats / EIN Summary -->
+        <div class="stats-card">
+          <h4 class="stats-title">Corporate Dossier</h4>
+          <div class="stat-row">
+            <span class="stat-label">Legal Entity:</span>
+            <span class="stat-val">KING VADI LLC</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Registered:</span>
+            <span class="stat-val">Colorado, USA</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Focus Area:</span>
+            <span class="stat-val">Media & Tech Holdings</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">R&D Lab:</span>
+            <span class="stat-val">Vadi Labs</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">IP Sandbox:</span>
+            <span class="stat-val">Vadiology</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Master Ownership:</span>
+            <span class="stat-val">100% Sovereign</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- RIGHT COLUMN -->
+      <section class="right-column">
+        
+        <!-- Pillar 1: The Sound -->
+        <div class="executive-card">
+          <div class="card-tag">Sonic Pillar</div>
+          <h3 class="card-headline">Devvadi Royal Records</h3>
+          <p class="card-desc">
+            A premium independent music venture managing all sonic compositions, master catalogs, and performance rights for the DEVVADI creative universe.
+          </p>
+          <ul class="bullet-list">
+            <li class="bullet-item">
+              <span class="bullet-dot">▪</span>
+              <span><strong>100% Stems Ownership:</strong> Full sovereign control over all master audio files, stems, publishing rights, and sync licenses.</span>
+            </li>
+            <li class="bullet-item">
+              <span class="bullet-dot">▪</span>
+              <span><strong>Active SoundCloud Embed:</strong> Globally accessible profiles showcasing high-fidelity synthetic scores and experimental singles.</span>
+            </li>
+            <li class="bullet-item">
+              <span class="bullet-dot">▪</span>
+              <span><strong>Cinematic Scoring:</strong> Blending heavy classical notation with futuristic sound design to soundscape complex structural lore.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Pillar 2: The Vision -->
+        <div class="executive-card">
+          <div class="card-tag">Visual Pillar</div>
+          <h3 class="card-headline">Narrative Lore & World-Building</h3>
+          <p class="card-desc">
+            Constructing expansive narrative sandboxes and graphic assets that serve as the background framework for visual albums and short film projects.
+          </p>
+          <ul class="bullet-list">
+            <li class="bullet-item">
+              <span class="bullet-dot">▪</span>
+              <span><strong>Vadiology IP:</strong> Intellectual property framework establishing the core maps, visual characters, and futuristic settings of the DEVVADI universe.</span>
+            </li>
+            <li class="bullet-item">
+              <span class="bullet-dot">▪</span>
+              <span><strong>Mirrorfall System:</strong> A dedicated visual cinema concept that guides the aesthetic rollouts of visual albums, setting new benchmarks for independent creators.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Pillar 3: The Tech -->
+        <div class="executive-card">
+          <div class="card-tag">Technology Pillar</div>
+          <h3 class="card-headline">Vadi Labs R&D</h3>
+          <p class="card-desc">
+            The advanced technology development branch specializing in automated media pipelines, developer tools, and proprietary creative frameworks.
+          </p>
+          <ul class="bullet-list">
+            <li class="bullet-item">
+              <span class="bullet-dot">▪</span>
+              <span><strong>Visual Automation Pipelines:</strong> Building custom local ComfyUI/VADIXAI pipelines for rendering high-fidelity, high-frame-rate AI visual animations.</span>
+            </li>
+            <li class="bullet-item">
+              <span class="bullet-dot">▪</span>
+              <span><strong>Sovereign Infrastructure:</strong> Coding custom backend systems (Go, JS) and offline databases to secure the brand's proprietary digital assets.</span>
+            </li>
+          </ul>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- OFFICIAL DATABASE SUBMISSION LEDGER (COMPLETED QUESTIONNAIRE) -->
+    <section class="ledger-section">
+      <div class="ledger-header">
+        <h3 class="ledger-title">#WinningTeam Database Submission — Official Questionnaire Ledger</h3>
+      </div>
+      <div class="ledger-grid">
+        
+        <div class="ledger-item">
+          <div class="ledger-question">01. Real Legal Name</div>
+          <div class="ledger-answer">Aaron Valdez</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">02. Stage Name</div>
+          <div class="ledger-answer">King Vadi (Enokh Devvadi Musa)</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">03. Official Company Names</div>
+          <div class="ledger-answer">DEVVADI Kingdom / Devvadi Royal Records / King Vadi LLC</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">04. Slogan & Brand Meaning</div>
+          <div class="ledger-answer">"DEVVADI represents a visionary kingdom built on creativity, music, innovation, leadership, and futuristic storytelling."<br><strong>Branding Slogan:</strong> “Building the Future Through Music, Vision & Creation.”</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">05. Corporate Mailing Address</div>
+          <div class="ledger-answer">536 W Adams Ave, Pueblo, CO 81004</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">06. Company Launch Portal</div>
+          <div class="ledger-answer"><a href="https://kvllc.me" target="_blank" style="color: var(--color-gold); text-decoration: none;">https://kvllc.me</a></div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">07. Primary Contact Number</div>
+          <div class="ledger-answer">719-582-8234</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">08. Primary Corporate Email</div>
+          <div class="ledger-answer">info@kvllc.me</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">09. Place of Birth & Verified Age</div>
+          <div class="ledger-answer">Born in Pueblo, Colorado, USA | Age 35</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">10. Parents' Names</div>
+          <div class="ledger-answer"><em>[Private Corporate Records — Verified & Provided Offline]</em></div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">11. Advanced Technology & R&D Division</div>
+          <div class="ledger-answer"><strong>Vadi Labs:</strong> Proprietary hardware setups and local visual automation pipelines (ComfyUI/VADIXAI video generation engines) allowing custom media compilation at absolute scale.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">12. Main Focus of Business</div>
+          <div class="ledger-answer">Independent music composition, visual R&D, creative brand strategy, and global entertainment rollouts.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">13. Active Projects & R&D Initiatives</div>
+          <div class="ledger-answer">DEVVADI Kingdom launch portal, ComfyUI video rendering automation, and lore architecture for <em>Vadiology</em> and <em>Mirrorfall</em>.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">14. Core Brand Motivation</div>
+          <div class="ledger-answer">Sovereignty and creative freedom. Providing premium independent distribution and technical tools for artists globally.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">15. Competitive Advantage</div>
+          <div class="ledger-answer">Blending imperial classical aesthetics (Cinzel typography, custom branding) with sovereign, bleeding-edge tech execution (custom databases, local AI visual networks). We own all master stems and tools.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">16. Corporate Definition of Success</div>
+          <div class="ledger-answer">Building a self-sustaining creative holding brand that operates with 100% artistic independence while distributing high-value intellectual property.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">17. Creative & Musical Influences</div>
+          <div class="ledger-answer">Pioneers of world-building, cinematic storytelling, and visual music—combining classic score orchestration with futuristic synthetic soundscapes.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">18. 5-Year Vision</div>
+          <div class="ledger-answer">Establishing a physical Pueblo studio headquarters, globally distributing audio-visual products via Devvadi Royal Records, and releasing Vadi Labs commercial automation engines.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">19. Direct Advice for Creators</div>
+          <div class="ledger-answer">"Own your masters, master your tools, and build your own infrastructure. Legends aren't born. They're built."</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">20. Origins & Foundation</div>
+          <div class="ledger-answer">Constructed through classical music training, visual arts, and self-taught software engineering to build robust media templates.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">21. Primary Operational Challenge</div>
+          <div class="ledger-answer">Balancing high-performance engineering, local hardware R&D, brand coordination, and creative composition under a single-operator system.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">22. Favorite Part of Creative Process</div>
+          <div class="ledger-answer">The transition from conceptual lore architecture (<em>Vadiology</em> maps, world-building documents) to sensory reality (completed audio files, high-impact glassmorphic websites, and animated video sequences).</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">23. Daily Duties & Execution</div>
+          <div class="ledger-answer">Advanced visual rendering tests, music composition, web development, and corporate trademark filing management.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">24. Social Networks</div>
+          <div class="ledger-answer"><strong>SoundCloud:</strong> <a href="https://soundcloud.com/kingvadi" target="_blank" style="color: var(--color-gold); text-decoration: none;">https://soundcloud.com/kingvadi</a> | Additional platforms pending rollout.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">25. Critical Achievements & Assets</div>
+          <div class="ledger-answer">Successfully formed and registered <strong>King Vadi LLC</strong> in Colorado; full master sovereignty and robust software deployments.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">26. 3-5 Year Plan</div>
+          <div class="ledger-answer">Scaling Devvadi Royal Records, publishing visual short films, and releasing Vadi Labs proprietary automation packages.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">27. Purchase/Donation Gateways</div>
+          <div class="ledger-answer">Configured directly on secure portals for direct supporter alignment.</div>
+        </div>
+
+        <div class="ledger-item">
+          <div class="ledger-question">28. Primary Supporting Links</div>
+          <div class="ledger-answer">Official Web: <a href="https://kvllc.me" style="color: var(--color-gold); text-decoration: none;">https://kvllc.me</a> | Email: <a href="mailto:info@kvllc.me" style="color: var(--color-gold); text-decoration: none;">info@kvllc.me</a></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="poster-footer">
+      <div class="footer-logos">
+        <div class="footer-logo-item">
+          <div class="footer-logo-frame">
+            <img src="logo_llc.jpg" alt="King Vadi LLC" class="logo-img">
+          </div>
+          <span class="footer-logo-tag">KING VADI LLC</span>
+        </div>
+        <div class="footer-logo-item">
+          <div class="footer-logo-frame labs-frame">
+            <img src="logo_labs.png" alt="Vadi Labs" class="logo-img logo-labs-contain" style="object-fit: contain; padding: 6px;">
+          </div>
+          <span class="footer-logo-tag">VADI LABS</span>
+        </div>
+      </div>
+      
+      <div>
+        <div class="confidential-seal">Confidential | DEVVADI IP Holding</div>
+      </div>
+      
+      <div class="credits-text">
+        <p>&copy; 2026 KING VADI LLC. All Rights Reserved. Pueblo, CO, USA.</p>
+        <p>Main Portal: <strong>https://kvllc.me</strong> | Contact: <strong>info@kvllc.me</strong></p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- FLOATING ACTIONS (HIDDEN ON PRINT) -->
+  <div class="action-panel">
+    <button class="btn" onclick="window.print();">Print Poster / Save PDF</button>
+    <a href="index.html" class="btn" style="background: rgba(12, 12, 15, 0.9); color: #fff; border-color: rgba(212, 175, 55, 0.2);">Return to Portal</a>
+  </div>
+
+</body>
+</html>

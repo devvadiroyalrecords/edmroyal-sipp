@@ -1,0 +1,553 @@
+/* ==========================================================================
+   SENTINEL VADI — SOVEREIGN CONTROL SYSTEMS DESIGN SYSTEM
+   VADI LABS R&D — HIGH-FIDELITY LUXURY HERALDRY (OBSIDIAN & BRUSHED GOLD)
+   ========================================================================== */
+
+/* 1. CORE TOKENS & RESET */
+:root {
+  --color-obsidian: #08080a;
+  --color-onyx: #121216;
+  --color-gold-raw: #f3c63f;
+  --color-gold-brushed: #d4af37;
+  --color-gold-burnished: #aa7c11;
+  --color-sienna: #8c6212;
+  --color-cream: #f2ebd9;
+  --color-white: #ffffff;
+  
+  --font-display: 'Cinzel', serif;
+  --font-sans: 'Montserrat', sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  
+  --shadow-gold-pulse: 0 0 15px rgba(212, 175, 55, 0.35);
+  --shadow-card-inner: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  --border-gold-glass: 1px solid rgba(212, 175, 55, 0.18);
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: default;
+}
+
+body {
+  background-color: var(--color-obsidian);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* 2. DYNAMIC BACKGROUND EFFECTS */
+.ambient-glow {
+  position: fixed;
+  top: -10%;
+  left: 30%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 75%);
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+  animation: pulse-ambient 18s ease-in-out infinite alternate;
+}
+
+.ambient-glow-secondary {
+  position: fixed;
+  bottom: -15%;
+  right: 15%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(140, 98, 18, 0.05) 0%, transparent 80%);
+  filter: blur(100px);
+  z-index: 0;
+  pointer-events: none;
+  animation: pulse-ambient 24s ease-in-out infinite alternate-reverse;
+}
+
+.cyber-grid {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(212, 175, 55, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 175, 55, 0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.scanline-effect {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(rgba(18, 18, 22, 0) 50%, rgba(8, 8, 10, 0.15) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.005), rgba(0, 0, 255, 0.01));
+  background-size: 100% 4px, 6px 100%;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* 3. STRUCTURAL GRID INTERFACE */
+.dashboard-wrapper {
+  position: relative;
+  z-index: 10;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  min-height: 100vh;
+}
+
+/* HEADER STYLE */
+.sentinel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: var(--border-gold-glass);
+  padding-bottom: 20px;
+  margin-bottom: 5px;
+}
+
+.sentinel-logo-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-ring {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid var(--color-gold-brushed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 18, 22, 0.8);
+  box-shadow: var(--shadow-gold-pulse);
+  animation: logo-spin 20s linear infinite;
+}
+
+.logo-ring img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.sentinel-titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.system-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--color-gold-raw);
+  text-transform: uppercase;
+}
+
+.sentinel-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, var(--color-cream) 0%, var(--color-gold-raw) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.status-badge {
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 8px 16px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.badge-pulse-node {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-gold-raw);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-gold-raw);
+  animation: node-pulse 1.4s infinite;
+}
+
+/* 4. EXECUTIVE GLASS CARDS */
+.glass-panel {
+  background: rgba(18, 18, 22, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: var(--border-gold-glass);
+  box-shadow: var(--shadow-card-inner), 0 15px 35px rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+}
+
+.panel-header {
+  padding: 18px 24px;
+  border-bottom: var(--border-gold-glass);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--color-cream);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-subtitle-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-gold-brushed);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.panel-body {
+  padding: 24px;
+}
+
+/* 5. 3-COLUMN CONTROL ROOM GRID */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 25px;
+  flex: 1;
+}
+
+@media (max-width: 1024px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.left-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* 6. TELEMETRY NODE ELEMENTS */
+.telemetry-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.stat-node {
+  background: rgba(8, 8, 10, 0.45);
+  border: 1px solid rgba(212, 175, 55, 0.08);
+  border-radius: 6px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: rgba(242, 235, 217, 0.5);
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-cream);
+}
+
+.stat-gauge-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(242, 235, 217, 0.08);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.stat-gauge-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-gold-burnished), var(--color-gold-raw));
+  border-radius: 2px;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+/* 7. SOVEREIGN IP PROTECTION GRID */
+.protection-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ip-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(242, 235, 217, 0.02);
+  border: 1px solid rgba(212, 175, 55, 0.06);
+  padding: 14px 20px;
+  border-radius: 6px;
+  transition: var(--transition-smooth);
+}
+
+.ip-card:hover {
+  background: rgba(212, 175, 55, 0.03);
+  border-color: rgba(212, 175, 55, 0.18);
+  transform: translateY(-2px);
+}
+
+.ip-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ip-title {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-cream);
+}
+
+.ip-meta {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: rgba(242, 235, 217, 0.45);
+}
+
+.ip-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-gold-raw);
+}
+
+.ip-status-node {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-gold-raw);
+  border-radius: 50%;
+}
+
+/* 8. LORE LIBRARIES */
+.lore-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.lore-card {
+  background: rgba(8, 8, 10, 0.45);
+  border: 1px solid rgba(212, 175, 55, 0.08);
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: var(--transition-smooth);
+}
+
+.lore-card:hover {
+  border-color: rgba(212, 175, 55, 0.25);
+  background: rgba(212, 175, 55, 0.02);
+}
+
+.lore-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--color-gold-raw);
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+
+.lore-card h4 {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.lore-card p {
+  font-size: 0.75rem;
+  color: rgba(242, 235, 217, 0.6);
+  line-height: 1.4;
+}
+
+/* 9. THE INTERACTIVE CYBER COMMAND TERMINAL */
+.terminal-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 500px;
+}
+
+.terminal-header-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.control-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(242, 235, 217, 0.15);
+}
+
+.control-dot.gold {
+  background: var(--color-gold-brushed);
+  box-shadow: 0 0 5px var(--color-gold-brushed);
+}
+
+.terminal-viewport {
+  flex: 1;
+  background: rgba(6, 6, 8, 0.85);
+  border-radius: 6px;
+  border: 1px solid rgba(212, 175, 55, 0.06);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--color-cream);
+  max-height: 600px;
+}
+
+.terminal-welcome {
+  color: rgba(242, 235, 217, 0.5);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+  padding-bottom: 10px;
+}
+
+.terminal-output-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.terminal-command-echo {
+  color: var(--color-gold-raw);
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-command-echo::before {
+  content: 'vadi@sentinel:~$';
+  color: rgba(242, 235, 217, 0.45);
+}
+
+.terminal-output-text {
+  color: rgba(242, 235, 217, 0.85);
+  white-space: pre-wrap;
+}
+
+.terminal-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid rgba(212, 175, 55, 0.08);
+  padding-top: 15px;
+  margin-top: auto;
+}
+
+.terminal-prompt {
+  color: rgba(242, 235, 217, 0.4);
+}
+
+.terminal-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-gold-raw);
+  caret-color: var(--color-gold-raw);
+}
+
+/* 10. COMPANION FOOTER */
+.sentinel-footer {
+  border-top: var(--border-gold-glass);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: rgba(242, 235, 217, 0.4);
+}
+
+.back-link {
+  color: var(--color-gold-raw);
+  text-decoration: none;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 6px 16px;
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+
+.back-link:hover {
+  background: rgba(212, 175, 55, 0.08);
+  box-shadow: var(--shadow-gold-pulse);
+  transform: translateY(-1px);
+}
+
+/* 11. KEYFRAME ANIMATIONS */
+@keyframes pulse-ambient {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.15) translate(-5%, 8%); }
+  100% { transform: scale(0.9) translate(10%, -5%); }
+}
+
+@keyframes logo-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes node-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(243, 198, 63, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(243, 198, 63, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(243, 198, 63, 0); }
+}

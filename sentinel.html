@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SENTINEL VADI — Sovereign Control Systems</title>
+  
+  <!-- SEO & Confidentiality Headers -->
+  <meta name="description" content="Sovereign security dashboard and AI R&D pipeline control center. Engineered by Vadi Labs. Confidential.">
+  <meta name="author" content="Vadi Labs">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="sentinel.css">
+</head>
+<body>
+
+  <!-- Ambient Grids & Glows -->
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-secondary"></div>
+  <div class="cyber-grid"></div>
+  <div class="scanline-effect"></div>
+
+  <!-- Main Dashboard Wrapper -->
+  <div class="dashboard-wrapper">
+    
+    <!-- Header Node -->
+    <header class="sentinel-header">
+      <div class="sentinel-logo-area">
+        <div class="logo-ring">
+          <img src="logo_vadi.png" alt="King Vadi Symbol">
+        </div>
+        <div class="sentinel-titles">
+          <span class="system-tag">SYSTEMS GUARD INTEGRATION</span>
+          <h1 class="sentinel-title">SENTINEL VADI CORE</h1>
+        </div>
+      </div>
+      
+      <div class="status-badge">
+        <div class="badge-pulse-node"></div>
+        <span>SOVEREIGN SECURE STATUS: ACTIVE</span>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Grid -->
+    <div class="grid-container">
+      
+      <!-- Left Column: Diagnostics, Status, and Lore -->
+      <div class="left-stack">
+        
+        <!-- Live Telemetry Gauges -->
+        <section class="glass-panel" id="telemetry-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="color: var(--color-gold-raw);">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+              </svg>
+              VADIXAI NEURAL R&D TELEMETRY
+            </h2>
+            <span class="panel-subtitle-tag">VADI LABS NODES</span>
+          </div>
+          
+          <div class="panel-body telemetry-row">
+            <div class="stat-node">
+              <span class="stat-label">GPU Render Temp</span>
+              <span class="stat-value" id="val-gpu-temp">64°C</span>
+              <div class="stat-gauge-track">
+                <div class="stat-gauge-fill" id="fill-gpu-temp" style="width: 64%;"></div>
+              </div>
+            </div>
+            
+            <div class="stat-node">
+              <span class="stat-label">VADIXAI Render Speed</span>
+              <span class="stat-value" id="val-fps">58.4 fps</span>
+              <div class="stat-gauge-track">
+                <div class="stat-gauge-fill" id="fill-fps" style="width: 78%;"></div>
+              </div>
+            </div>
+            
+            <div class="stat-node">
+              <span class="stat-label">ComfyUI Pipeline Queue</span>
+              <span class="stat-value" id="val-queue">0 jobs</span>
+              <div class="stat-gauge-track">
+                <div class="stat-gauge-fill" id="fill-queue" style="width: 12%;"></div>
+              </div>
+            </div>
+            
+            <div class="stat-node">
+              <span class="stat-label">Local Server Load</span>
+              <span class="stat-value" id="val-load">32.8%</span>
+              <div class="stat-gauge-track">
+                <div class="stat-gauge-fill" id="fill-load" style="width: 32%;"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sovereign IP Protection Grid -->
+        <section class="glass-panel" id="protection-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="color: var(--color-gold-raw);">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 15l-4-4 1.41-1.41L10 13.17l5.59-5.59L17 9l-7 7z"/>
+              </svg>
+              SOVEREIGN ARTISTRY REGISTRY (IP GUARD)
+            </h2>
+            <span class="panel-subtitle-tag">MASTER ASSETS</span>
+          </div>
+          
+          <div class="panel-body protection-list">
+            
+            <!-- Asset 1 -->
+            <div class="ip-card">
+              <div class="ip-info">
+                <span class="ip-title">vocal.m4a (Sovereign Audio Master Stems)</span>
+                <span class="ip-meta">SHA-256: 7f77304372ef... | Devvadi Royal Records</span>
+              </div>
+              <div class="ip-status">
+                <div class="ip-status-node"></div>
+                <span id="status-vocal">SECURED</span>
+              </div>
+            </div>
+            
+            <!-- Asset 2 -->
+            <div class="ip-card">
+              <div class="ip-info">
+                <span class="ip-title">King Vadi LLC (State Corporate Entity Filing)</span>
+                <span class="ip-meta">Filing ID: 2026-LLC-81004 | Colorado SOS</span>
+              </div>
+              <div class="ip-status">
+                <div class="ip-status-node"></div>
+                <span id="status-llc">VERIFIED</span>
+              </div>
+            </div>
+
+            <!-- Asset 3 -->
+            <div class="ip-card">
+              <div class="ip-info">
+                <span class="ip-title">cinematic_teaser_poster.png (Visual Matrix Asset)</span>
+                <span class="ip-meta">SHA-256: d1ed6765f4d7... | Vadiology Universe</span>
+              </div>
+              <div class="ip-status">
+                <div class="ip-status-node"></div>
+                <span id="status-teaser">SECURED</span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Lore Libraries Overview -->
+        <section class="glass-panel" id="lore-panel">
+          <div class="panel-header">
+            <h2 class="panel-title">
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="color: var(--color-gold-raw);">
+                <path d="M12 11.55C9.64 9.35 6.48 8 3 8v11c3.48 0 6.64 1.35 9 3.55 2.36-2.2 5.52-3.55 9-3.55V8c-3.48 0-6.64 1.35-9 3.55zM12 8c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3z"/>
+              </svg>
+              SOVEREIGN LORE CODES
+            </h2>
+            <span class="panel-subtitle-tag">VADIOLOGY MAPS</span>
+          </div>
+          
+          <div class="panel-body lore-grid">
+            <div class="lore-card">
+              <div class="lore-icon">V</div>
+              <h4>VADIOLOGY</h4>
+              <p>Expansive system maps, visual assets, and character directories forming the foundation of the cinematic synth scoring pipeline.</p>
+            </div>
+            <div class="lore-card">
+              <div class="lore-icon">M</div>
+              <h4>MIRRORFALL</h4>
+              <p>Visual sci-fi world concepts establishing aesthetic benchmarks for multi-channel video rollouts and creative master stems.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Right Column: Interactive Command Terminal -->
+      <section class="glass-panel terminal-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="color: var(--color-gold-raw);">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 12H4v-2h8v2zm8-4H4V8h16v4z"/>
+            </svg>
+            SENTINEL VADI SYSTEMS COMMAND TERMINAL
+          </h2>
+          <div class="terminal-header-controls">
+            <div class="control-dot"></div>
+            <div class="control-dot"></div>
+            <div class="control-dot gold"></div>
+          </div>
+        </div>
+        
+        <div class="panel-body terminal-viewport" id="terminal-viewport">
+          <div class="terminal-welcome">
+            <div>======================================================================</div>
+            <div>SENTINEL VADI CORE INTELLIGENCE HUB — PROTOCOLS ENABLED</div>
+            <div>SYSTEM DIAGNOSTICS ACTIVE | CONFIDENTIAL BRAND DIRECTIVE</div>
+            <div>======================================================================</div>
+            <div style="margin-top: 10px;">Type 'help' to summon operational controls. Secure gateway initialized.</div>
+          </div>
+          
+          <div id="terminal-content">
+            <!-- Command logs render here -->
+          </div>
+          
+          <div class="terminal-input-wrapper">
+            <span class="terminal-prompt">vadi@sentinel:~$</span>
+            <input type="text" class="terminal-input" id="terminal-input" placeholder="Initiate transmission..." autofocus autocomplete="off" spellcheck="false">
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Footer Node -->
+    <footer class="sentinel-footer">
+      <span>&copy; 2026 KING VADI LLC. CONFIDENTIAL SOVEREIGN IP.</span>
+      <a href="index.html" class="back-link">&larr; Access Public Portal</a>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="sentinel.js"></script>
+</body>
+</html>
